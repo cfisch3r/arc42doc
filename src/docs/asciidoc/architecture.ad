@@ -23,6 +23,44 @@
 ....
 
 
+
+[plantuml, "test-plantuml"]
+.....
+@startuml
+
+[Lesermarkt Portal] <<Typo3 CMS>> as lm_portal
+[FAZ Aboshop] <<Oxid Shop System>> as shop
+[SAP] as sap
+[Evolver SSO] <<Authentication Service>> as sso
+[Stationäres E-Paper] <<Java Webapplication>> as epaper
+[Mobile Authentication Service] <<Java REST Service>> as mas
+[FAZ/FAS Mobiles E-Paper] <<Mobile App>> as epaper_app
+[Abodat] <<.NET SOAP Service>> as abodat
+:Lesermarkt Mitarbeiter: as lm_user
+
+skinparam component {
+    backgroundColor<<Oxid Shop System>> LightBlue
+}
+
+lm_user -down-> shop
+lm_user -down-> lm_portal
+:Käufer: -down-> shop
+:Käufer: -down-> sso
+:Käufer: -down-> epaper_app
+:Käufer: -down-> epaper
+epaper_app -down- mas
+shop -down- sso
+shop -down- sap
+shop -left- lm_portal
+mas -down- sso
+mas -down- abodat
+epaper -down- abodat
+epaper -down- sso
+abodat -down- sap
+@enduml
+.....
+
+
 [role="arc42help"]
 ****
 .Inhalt

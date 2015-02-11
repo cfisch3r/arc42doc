@@ -44,4 +44,11 @@ asciidoctor {
     gemPath = jrubyPrepareGems.outputDir
 }
  
-defaultTasks 'asciidoctor'
+defaultTasks 'asciidoctor', 'copyGeneratedImages'
+
+task copyGeneratedImages(type: Copy) {
+	from 'src/docs/asciidoc'
+	into 'build/asciidoc/html5'
+	include '**/*'
+	exclude '**/*.ad*'
+}
