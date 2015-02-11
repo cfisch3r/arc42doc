@@ -44,11 +44,15 @@ asciidoctor {
     gemPath = jrubyPrepareGems.outputDir
 }
  
-defaultTasks 'asciidoctor', 'copyGeneratedImages'
+defaultTasks 'asciidoctor', 'copyGeneratedImagesToBuildDir', 'deleteGeneratedImagesFromSrcDir'
 
-task copyGeneratedImages(type: Copy) {
+task copyGeneratedImagesToBuildDir(type: Copy) {
 	from 'src/docs/asciidoc'
 	into 'build/asciidoc/html5'
 	include '**/*'
 	exclude '**/*.ad*'
+}
+
+task deleteGeneratedImagesFromSrcDir(type: Delete) {
+  delete fileTree(dir: 'src/docs/asciidoc', include: '**/*', exclude: '**/*.ad*')
 }
