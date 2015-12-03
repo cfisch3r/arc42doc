@@ -42,6 +42,22 @@ asciidoctor {
     // Set path to find gems to directory
     // used by jrubyPrepareGems task.
     gemPath = jrubyPrepareGems.outputDir
+
+
+    extensions {
+	preprocessor { document,reader ->
+		println "xcvxcvxvxv"
+            println reader
+        }
+
+	block('arc42diagram') {
+	        parent, reader, attributes ->
+		    def content = 'adasdas';
+
+	    createBlock(parent, 'paragraph', [content], attributes, [:])
+	}
+   }
+
 }
  
 defaultTasks 'asciidoctor', 'copyGeneratedImagesToBuildDir', 'deleteGeneratedImagesFromSrcDir'
